@@ -1,0 +1,34 @@
+<%- include("partials/header") -%>
+    <h2>Tất cả các học sinh</h2>
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Mã học sinh</th>
+            <th scope="col">Họ</th>
+            <th scope="col">Tên</th>
+            <th scope="col">Đã điểm danh?</th>
+          </tr>
+        </thead>
+        <tbody>
+            <% allStudent.forEach(element => { %>
+                <tr>
+                    <th scope="row"> <%= element.studentID %> </th>
+                    <td> <%= element.lastName %> </td>
+                    <td><%= element.firstName %> </td>
+                    <td> <%= element.status ? "Có mặt" : "Vắng" %> </td>
+                </tr>
+            <% }) %>
+        </tbody>
+      </table>
+
+      <h2>Điểm danh</h2>
+      <form action="/diem_danh" method="post">
+        <button type="submit">Chụp ảnh</button>
+      </form>
+
+      <h2>Reset</h2>
+      <form action="/reset" method="post">
+        <button type="submit">Reset</button>
+      </form>
+
+<%- include("partials/footer") -%>
