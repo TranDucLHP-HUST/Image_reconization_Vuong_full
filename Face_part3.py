@@ -33,15 +33,6 @@ while True:
         if str(Id) in studentToID:  # found student
             name = studentToID[str(Id)]
 
-            # save data student
-            day_now = datetime.date.today()
-            DATA_FILE = "data_student/Student_Day_" + str(day_now) + ".csv"
-
-            with open(DATA_FILE, 'a+') as csv_file:
-                fieldnames = [name, 'Da diem danh']  # Định dạng cột
-                writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
-                writer.writeheader()
-
         cv2.putText(im, str(name), (x, y + h), font, 0.8, (255, 255, 255), 1, cv2.LINE_AA)
     cv2.imshow('im', im)
     if cv2.waitKey(10) & 0xFF == ord('q'):
@@ -49,5 +40,14 @@ while True:
 
 print(max(freq, key=freq.get))  # tra ra id cua nguoi diem danh
 
+# save data student
+day_now = datetime.date.today()
+DATA_FILE = "data_student/Student_Day_" + str(day_now) + ".csv"
+
+name = studentToID[str(max(freq, key=freq.get))]
+with open(DATA_FILE, 'a+') as csv_file:
+    fieldnames = [name, 'Da diem danh']  # Định dạng cột
+    writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
+    writer.writeheader()
 cam.release()
 cv2.destroyAllWindows()
